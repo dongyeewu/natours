@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const mongoSanitizer = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const compression = require('compression');
 // const promMid = require('express-prometheus-middleware');
 
 const appError = require('./utils/appError');
@@ -119,6 +120,8 @@ app.use(hpp({
                'difficulty',
                'price']
 }));
+
+app.use(compression());
 
 app.use((req,res,next)=>{
     req.requestTime = new Date().toISOString();
